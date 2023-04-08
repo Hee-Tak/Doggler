@@ -41,12 +41,13 @@ class DogCardAdapter(
     /**
      * Initialize view elements
      */
+
     class DogCardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         // TODO: Declare and initialize all of the list item UI components
-        val imageView: ImageView? = view?.findViewById(R.id.dog_image)
-        val nameTextView: TextView? = view?.findViewById(R.id.dog_name)
-        val ageTextView: TextView? = view?.findViewById(R.id.dog_age)
-        val hobbiesTextView: TextView? = view?.findViewById(R.id.dog_hobbies)
+        val imageView: ImageView? = view!!.findViewById(R.id.dog_image)
+        val nameTextView: TextView? = view!!.findViewById(R.id.dog_name)
+        val ageTextView: TextView? = view!!.findViewById(R.id.dog_age)
+        val hobbiesTextView: TextView? = view!!.findViewById(R.id.dog_hobbies)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogCardViewHolder {
@@ -72,36 +73,41 @@ class DogCardAdapter(
     }
 
     override fun getItemCount(): Int = dogList.size // TODO: return the size of the data set instead of 0
-
+    //override fun getItemCount(): Int {
+    //    val distinctDogList = dogList.distinctBy{it.name}
+    //    return distinctDogList.size
+    //}
     override fun onBindViewHolder(holder: DogCardViewHolder, position: Int) {
         // TODO: Get the data at the current position
         // TODO: Set the image resource for the current dog
         // TODO: Set the text for the current dog's name
         // TODO: Set the text for the current dog's age
-        //val resources = context?.resources
+        //
         // TODO: Set the text for the current dog's hobbies by passing the hobbies to the
         //  R.string.dog_hobbies string constant.
         //  Passing an argument to the string resource looks like:
         //  resources?.getString(R.string.dog_hobbies, dog.hobbies)
 
-        // Get the dataat the current position
+        val resources = context?.resources
+
+        // Get the data at the current position
         val dog = dogList[position]
 
         // Set the image resource for the current dog
-        holder.imageView?.setImageResource(dog.imageResourceId)
+        holder.imageView!!.setImageResource(dog.imageResourceId)
 
         // Set the text for the current dog's name
-        holder.nameTextView?.text = dog.name
+        holder.nameTextView!!.text = dog.name
 
         // Set the text for the current dog's age
-        holder.ageTextView?.text = context?.getString(R.string.dog_age, dog.age)
+        holder.ageTextView!!.text = resources?.getString(R.string.dog_age, dog.age)
 
-        val resources = context?.resources
 
         // Set the text for the current dog's hobbies by passing the hobbies to the
         // R.string.dog_hobbies string constant.
         // Passing an argument to the string resource looks like:
-        holder.hobbiesTextView?.text = resources?.getString(R.string.dog_hobbies, dog.hobbies)
-
+        //holder.hobbiesTextView?.text = resources?.getString(R.string.dog_hobbies, dog.hobbies)
+        //holder.hobbiesTextView?.text = context?.getString(R.string.dog_hobbies, dog.hobbies)
+        holder.hobbiesTextView!!.text = resources?.getString(R.string.dog_hobbies, dog.hobbies)
     }
 }
